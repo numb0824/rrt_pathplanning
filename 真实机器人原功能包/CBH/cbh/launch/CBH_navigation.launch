@@ -1,0 +1,48 @@
+<!--XML-->
+<launch>
+	<!--底盘控制-->
+	<include file="$(find bobac_controller)/launch/bobac_controller.launch" />
+
+	 <!--激光雷达-->
+	 <include file="$(find rplidar_ros)/launch/rplidar.launch" />
+
+	<!--手柄控制-->
+	<include file="$(find bobac_joy)/launch/bobac_joy.launch" />
+
+	<!--机器人urdf描述-->
+	<include file="$(find bobac_description)/launch/display.launch" />
+	
+	<!--gmapping-->
+	<!--include file="$(find cbh)/launch/CBH_gmapping.launch" /-->
+
+	<!--filter and robot pose ekf-->
+	<include file="$(find cbh)/launch/filter.launch" /> 
+     
+  	<!--设置地图的配置文件-->
+    <arg name="map" default="last_map.yaml" />
+  
+ 	<!--运行地图服务器，并且加载设置的地图-->
+    <node name="map_server" pkg="map_server" type="map_server" args="$(find cbh)/maps/$(arg map)" />
+ 
+  	<!--运行move_base节点-->
+  	<include file="$(find cbh)/launch/CBH_movebase.launch" />
+  
+  	<!--启动AMCL-->
+  	<include file="$(find cbh)/launch/CBH_amcl.launch" />
+
+        <!--initial pose-->
+	<node name="Pose_init_lichao" pkg="cbh" type="Pose_init_lichao" />
+
+	<!--lichao_goal pose-->
+	<!--node name="lichao_goal" pkg="cbh" type="sub_action_goal__cycle2" output="screen" launch-prefix="gnome-terminal command">
+	</node-->
+	
+	<!--recover from cycle plugin-->
+	<node name="CBH_cycle" pkg="cycle_nav" type="cycle_nav" output="screen"/>
+
+	<!--display marker-->
+	<node name="CBH_marker" pkg="cbh" type="CBH_marker">
+		<param name="sub_topic" value="/Boshen_Goal" />
+	</node>
+	
+</launch>

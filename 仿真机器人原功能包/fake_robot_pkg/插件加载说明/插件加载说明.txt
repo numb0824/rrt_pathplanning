@@ -1,0 +1,13 @@
+#本文档内容请结合三张图片查看
+
+#1.加载tool.png
+
+ 点击Publish Point右边的 + 按钮，会弹出图中所示界面，选择Cycle_Goal，点击OK,将会在工具栏生成Cycle_Goal工具。
+
+2.#加载panel.png
+
+ 进入rviz，将鼠标移至桌面左上角，点击Panels->Add New Panel,将会出现如图所示界面，选择NavPanel,点击OK，将会在rviz左下角生成NavPanel插件。
+
+3.#加载完成界面.png
+
+ 操作无误，工具栏和插件框应与图中相符

@@ -1,0 +1,19 @@
+<launch>
+	<!--底盘控制-->
+	<include file="$(find bobac_controller)/launch/bobac_controller.launch" />
+
+	 <!--激光雷达-->
+	 <include file="$(find rplidar_ros)/launch/rplidar.launch" />
+
+	<!--手柄控制-->
+	<include file="$(find bobac_joy)/launch/bobac_joy.launch" />
+
+	<!--机器人urdf描述-->
+	<include file="$(find bobac_description)/launch/display.launch" />
+
+	<!--gmapping-->
+	<include file="$(find cbh)/launch/CBH_gmapping.launch" />
+
+	<!--filter and robot pose ekf-->
+	<include file="$(find cbh)/launch/filter.launch" />
+</launch>
